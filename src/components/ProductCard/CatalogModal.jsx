@@ -2,11 +2,7 @@ import { useSearchParams, Link } from "react-router-dom";
 
 const CatalogModal = ({ product, onClose }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  
-  // Membaca tab yang aktif dari URL, default ke 'philosophy'
   const activeTab = searchParams.get("section") || "philosophy";
-
-  // Fungsi untuk mengganti tab dengan mengubah URL (Routing Interaktif)
   const changeTab = (tabName) => {
     setSearchParams({ item: product.id, section: tabName });
   };
@@ -33,16 +29,6 @@ const CatalogModal = ({ product, onClose }) => {
 
         {/* Right: Product Details */}
         <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col overflow-y-auto">
-          
-          {/* Badges */}
-          <div className="flex items-center gap-2 mb-4">
-            <span className="bg-[#4D342D] text-[#FFFBF7] text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded-sm">
-              Geometric
-            </span>
-            <span className="bg-[#FFD1D1] text-[#D47A7A] text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded-sm">
-              Limited Edition
-            </span>
-          </div>
 
           <h2 className="text-3xl font-serif text-[#4D342D] mb-2">{product.title}</h2>
           <p className="text-[#A88877] font-bold text-sm mb-6">{product.priceFormatted}</p>
@@ -50,7 +36,7 @@ const CatalogModal = ({ product, onClose }) => {
           {/* Grid Attributes */}
           <div className="grid grid-cols-2 gap-6 mb-8 pb-6 border-b border-[#EAE4DF]">
             <div>
-              <span className="text-[10px] font-bold text-[#8C7A71] uppercase tracking-widest block mb-1">Dimension</span>
+              <span className="text-[10px] font-bold text-[#8C7A71] uppercase tracking-widest block mb-1">Ukuran Kain</span>
               <span className="text-sm text-[#4D342D] font-medium">{product.dimension}</span>
             </div>
             <div>
@@ -61,7 +47,7 @@ const CatalogModal = ({ product, onClose }) => {
 
           {/* Interactive Routing Tabs */}
           <div className="flex gap-6 border-b border-[#EAE4DF] mb-6">
-            {['philosophy', 'craftsmanship', 'care'].map((tab) => (
+            {['philosophy', 'care'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => changeTab(tab)}
@@ -69,7 +55,9 @@ const CatalogModal = ({ product, onClose }) => {
                   activeTab === tab ? "text-[#4D342D]" : "text-[#B8A99F] hover:text-[#8C7A71]"
                 }`}
               >
+                {}
                 {tab === 'care' ? 'Care Guide' : tab}
+                
                 {activeTab === tab && (
                   <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#A88877]"></span>
                 )}
@@ -86,29 +74,6 @@ const CatalogModal = ({ product, onClose }) => {
                 <div className="bg-[#FDF6E3] border-l-4 border-[#D4A373] p-4 text-[#8C7A71] italic text-xs">
                   "{product.details.philosophy.quote}"
                 </div>
-              </div>
-            )}
-
-            {activeTab === 'craftsmanship' && (
-              <div className="animate-fade-in flex flex-col gap-4">
-                {/* Progress Bars */}
-                <div className="flex flex-col gap-1">
-                  <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#4D342D]">
-                    <span>Breathability</span><span>{product.details.craftsmanship.breathability}%</span>
-                  </div>
-                  <div className="w-full bg-[#EAE4DF] h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-[#A88877] h-full" style={{ width: `${product.details.craftsmanship.breathability}%` }}></div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1 mb-2">
-                  <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#4D342D]">
-                    <span>Durability</span><span>{product.details.craftsmanship.durability}%</span>
-                  </div>
-                  <div className="w-full bg-[#EAE4DF] h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-[#A88877] h-full" style={{ width: `${product.details.craftsmanship.durability}%` }}></div>
-                  </div>
-                </div>
-                <p>{product.details.craftsmanship.text}</p>
               </div>
             )}
 

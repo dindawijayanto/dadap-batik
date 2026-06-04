@@ -1,4 +1,3 @@
-/* Reusable card for products or batik categories */
 import FeatureCard from "../UI/FeatureCard";
 
 const ProductCard = ({ title, status, description, image, features }) => {

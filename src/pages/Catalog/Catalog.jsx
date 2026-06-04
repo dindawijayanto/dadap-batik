@@ -2,84 +2,106 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import CatalogCard from "../../components/ProductCard/CatalogCard";
 import CatalogModal from "../../components/ProductCard/CatalogModal";
-
-// 1. DUMMY DATA & FILTERS (DI LUAR KOMPONEN)
-// Diletakkan di sini agar tidak memicu warning ESLint "exhaustive-deps"
-const dummyDatabase = [
-  {
-    id: "prod-001",
-    title: "Kawung Sari Gold",
-    price: 2450000,
-    priceFormatted: "Rp 2.450.000",
-    description: "HAND-STAMPED PRIMISSIMA COTTON",
-    category: "GEOMETRIC (KAWUNG)",
-    image: "/REPLACE_IMAGE_HERE",
-    dimension: "Hand-Stamped Primissima Cotton",
-    technique: "Batik Tulis Traditional",
-    details: {
-      philosophy: {
-        text: "This pattern represents the divine connection between earth and sky. Historically worn during sacred ceremonies, it symbolizes a journey towards enlightenment and spiritual growth.",
-        quote: "A soul woven into every stroke, a story told in every line."
-      },
-      craftsmanship: {
-        breathability: 95,
-        durability: 88,
-        text: "Made from Premium Silk, it offers superior comfort and a lustrous drape suitable for luxury occasion wear."
-      },
-      care: {
-        text: "Avoid direct sunlight and use traditional lerak soap for washing if dry cleaning is unavailable."
-      }
-    }
-  },
-  // Kamu bisa menduplikat object di atas untuk menambahkan produk prod-002, prod-003, dst...
-];
+import { supabase } from "../../utils/supabase";
 
 const filters = [
-  "JENIS BATIK",
-  "GEOMETRIC (KAWUNG)",
-  "ORGANIC (PARANG)",
-  "COASTAL (MEGA MENDUNG)",
+  "SEMUA",
+  "TULIS",
+  "CAP"
 ];
 
 const Catalog = () => {
-  // 2. STATE MANAGEMENT
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState("JENIS BATIK");
+  const [activeFilter, setActiveFilter] = useState("SEMUA");
   
-  // 3. URL PARAMETER ROUTING MANAGEMENT
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedItemId = searchParams.get("item"); // Membaca URL: misal "?item=prod-001"
+  const selectedItemId = searchParams.get("item");
 
-  // Mencari produk yang sesuai dengan ID dari URL
-  const selectedProduct = dummyDatabase.find(p => p.id === selectedItemId);
+  const rawSelectedProduct = products.find(p => String(p.id) === selectedItemId);
 
-  // 4. FUNGSI KENDALI MODAL
-  const closeModal = () => {
-    setSearchParams({}); // Mengosongkan parameter di URL untuk menutup modal
-  };
+  // MAPPING DATA UNTUK MODAL
+  let formattedModalProduct = null;
+  if (rawSelectedProduct) {
+    formattedModalProduct = {
+      id: rawSelectedProduct.id,
+      title: rawSelectedProduct.name,
+      priceFormatted: new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(rawSelectedProduct.base_price || 0),
+      image: rawSelectedProduct.resolved_image_url || "/REPLACE_IMAGE_HERE", 
+      dimension: rawSelectedProduct.dimensions || "-",
+      technique: rawSelectedProduct.production_technique || "-",
+      details: {
+        philosophy: {
+          text: rawSelectedProduct.philosophy || "Belum ada informasi filosofi.",
+          quote: rawSelectedProduct.quote || "A soul woven into every stroke."
+        },
+        craftsmanship: {
+          breathability: 95, 
+          durability: 88,    
+          text: rawSelectedProduct.description || ""
+        },
+        care: {
+          text: rawSelectedProduct.care_instructions || "Belum ada instruksi perawatan."
+        }
+      }
+    };
+  }
 
-  const openModal = (productId) => {
-    setSearchParams({ item: productId }); // Menambahkan ID ke URL untuk membuka modal
-  };
+  const closeModal = () => setSearchParams({}); 
+  const openModal = (productId) => setSearchParams({ item: String(productId) }); 
 
-  // 5. API FETCH SIMULATION
+  // FETCH DATA SUPABASE 
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        // Simulasi delay jaringan (hapus ini saat pakai API asli)
-        setTimeout(() => {
-          setProducts(dummyDatabase);
-          setIsLoading(false);
-        }, 500);
+        const { data, error } = await supabase
+          .from('products')
+          .select(`
+            *,
+            product_images (
+              storage_path,
+              is_primary
+            )
+          `);
+
+        if (error) throw error;
+
+        // PROSES DATA GAMBAR
+        const processedData = (data || []).map(product => {
+          const imageRecord = product.product_images?.find(img => img.is_primary) || product.product_images?.[0];
+          
+          let publicImageUrl = null;
+          if (imageRecord && imageRecord.storage_path) {
+            publicImageUrl = imageRecord.storage_path;
+          }
+
+          return {
+            ...product,
+            resolved_image_url: publicImageUrl
+          };
+        });
+
+        // Data langsung di-set ke state tanpa console.log
+        setProducts(processedData);
       } catch (error) {
-        console.error("Gagal memuat:", error);
+        // Tetap menyisakan console.error ini agar jika server mati, kamu tetap tahu penyebabnya
+        console.error("Gagal mengambil data dari Supabase:", error.message);
+      } finally {
         setIsLoading(false);
       }
     };
+
     fetchProducts();
   }, []);
+
+  // LOGIKA FILTERING
+  const filteredProducts = activeFilter === "SEMUA" 
+    ? products 
+    : products.filter(product => {
+        const technique = product.production_technique || "";
+        return technique.toUpperCase().includes(activeFilter.toUpperCase());
+      });
 
   return (
     <div className="bg-[#FAF6F2] min-h-screen pt-32 pb-24 px-6 md:px-16 lg:px-24">
@@ -94,7 +116,7 @@ const Catalog = () => {
         </p>
       </div>
 
-      {/* Filter / Group By Section */}
+      {/* Filter Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between border-t border-b border-[#E6DDD6] py-4 mb-10 gap-4">
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-xs font-bold text-[#8C7A71] tracking-widest mr-2">GROUP BY:</span>
@@ -104,47 +126,46 @@ const Catalog = () => {
               onClick={() => setActiveFilter(filter)}
               className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${
                 activeFilter === filter
-                  ? "bg-[#4D342D] text-white" // Active State
-                  : "bg-[#EAE4DF] text-[#8C7A71] hover:bg-[#D5CDC4]" // Inactive State
+                  ? "bg-[#4D342D] text-white" 
+                  : "bg-[#EAE4DF] text-[#8C7A71] hover:bg-[#D5CDC4]" 
               }`}
             >
               {filter}
             </button>
           ))}
         </div>
-        
-        {/* Filter Icon Placeholder */}
-        <button className="hidden md:flex text-[#4D342D] hover:text-black">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 6H20M7 12H17M10 18H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
       </div>
 
       {/* Product Grid */}
       {isLoading ? (
         <div className="text-center py-20 text-[#8C7A71] font-semibold tracking-widest animate-pulse">
-          MEMUAT KATALOG...
+          MEMUAT KATALOG DARI DATABASE...
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {products.map((product) => (
-            <CatalogCard
-              key={product.id}
-              title={product.title}
-              price={product.price}
-              description={product.description}
-              image={product.image}
-              onClick={() => openModal(product.id)} // Eksekusi buka modal saat kartu diklik
-            />
-          ))}
+          {filteredProducts.length === 0 ? (
+            <div className="col-span-full text-center text-[#8C7A71] py-10">
+              Belum ada produk di kategori ini.
+            </div>
+          ) : (
+            filteredProducts.map((product) => (
+              <CatalogCard
+                key={product.id}
+                title={product.name}                  
+                price={Number(product.base_price)}    
+                description={product.production_technique} 
+                image={product.resolved_image_url} 
+                onClick={() => openModal(product.id)} 
+              />
+            ))
+          )}
         </div>
       )}
 
-      {/* Render Modal jika ada produk yang dipilih di URL */}
-      {selectedProduct && (
+      {/* Render Modal */}
+      {formattedModalProduct && (
         <CatalogModal 
-          product={selectedProduct} 
+          product={formattedModalProduct} 
           onClose={closeModal} 
         />
       )}
