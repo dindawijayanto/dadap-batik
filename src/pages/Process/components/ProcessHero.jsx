@@ -1,6 +1,6 @@
 const ProcessHero = () => {
   return (
-    <section className="pt-32 pb-16 px-6 md:px-16 lg:px-24 bg-[#FAF6F2] flex flex-col lg:flex-row items-center gap-60">
+    <section className="pt-24 pb-16 px-6 md:px-16 lg:px-24 bg-[#FAF6F2] flex flex-col lg:flex-row items-center gap-60">
       <div className="flex-1 flex flex-col gap-6">
         <span className="text-xs font-dm-sans font-bold tracking-[3px] text-[#B2993D] uppercase">
           Seni yang Melampaui Waktu

@@ -24,9 +24,9 @@ const ProcessAccordion = () => {
 
   return (
     <section className="py-24 px-6 md:px-16 lg:px-24 bg-[#FAF6F2]">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-serif text-[#4D342D] mb-4">The Architecture of Value</h2>
-        <p className="text-sm text-[#8C7A71] uppercase tracking-widest">Our commitment to the craft</p>
+      <div className="text-center mb-20">
+        <h2 className="text-3xl md:text-4xl font-noto-serif font-bold text-[#001020] mb-4">Nilai Arsitektur</h2>
+        <p className="text-md text-[#001020] font-dm-sans font-regular tracking-wide">Transaparansi penuh di balik setiap angka yang anda bayar.</p>
       </div>
 
       <div className="max-w-3xl mx-auto flex flex-col gap-4">
