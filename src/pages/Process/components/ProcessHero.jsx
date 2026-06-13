@@ -17,7 +17,7 @@ const ProcessHero = () => {
         {/* Main Image */}
         <div className="w-full aspect-square bg-[#E6DDD6] overflow-hidden rounded-sm relative">
           <img 
-            src="/process_artisan.png"
+            src="/process/artisan.png"
             alt="Artisan applying hot wax"
             className="w-full h-full object-cover"
           />
