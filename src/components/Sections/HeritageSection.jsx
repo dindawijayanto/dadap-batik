@@ -15,13 +15,13 @@ const HeritageSection = ({
     <section className="py-24 px-6 md:px-16 lg:px-24 bg-[#FAF6F2]">
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-0">
         {/* Photo side with founders tag */}
-        <div className="w-full md:w-1/2 h-auto md:h-[500px] lg:h-full rounded-xl border-none border-[#E6DDD6] relative">
+        <div className="w-full lg:w-1/2 h-auto md:h-full lg:h-full rounded-xl border-none border-[#E6DDD6] relative">
           <img
             src={photo}
             alt="Workshop Photo"
             className="w-full md:w-4/5 h-full object-cover justify-center mx-auto"
           />
-          <div className="absolute -top-4 left-12 bg-gradient-to-r from-[#B2993D] to-[#001020] px-4 py-2 text-[#FFE6D3]">
+          <div className="absolute -top-4 left-0 md:left-12 bg-gradient-to-r from-[#B2993D] to-[#001020] px-4 py-2 text-[#FFE6D3]">
             <h4 className="leading-[1.1]">PARA PENDIRI</h4>
             <span className="text-md font-serif">Imam & Yuni</span>
           </div>
