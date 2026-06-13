@@ -1,25 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Button from "../UI/Button"; // Pastikan Button dari slice sebelumnya sudah ada
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Menyimpan data navigasi di dalam array agar lebih rapi (DRY Principle)
   const navLinks = [
-    { name: "HOME", path: "/" },
-    { name: "OUR STORY", path: "/our-story" },
-    { name: "PROCESS", path: "/process" },
-    { name: "CATALOG", path: "/catalog" },
+    { name: "BERANDA", path: "/" },
+    { name: "KISAH KAMI", path: "/our-story" },
+    { name: "PROSES", path: "/process" },
+    { name: "KATALOG", path: "/catalog" },
     { name: "TRY-ON", path: "/try-on" },
-    { name: "CONTACT", path: "/contact" },
+    { name: "KONTAK", path: "/contact" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#FAF6F2]/90 backdrop-blur-md px-6 md:px-12 lg:px-24 py-5 flex items-center justify-between transition-all duration-300">
-      
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 px-6 md:px-12 lg:px-24 py-5 flex items-center justify-between transition-all duration-300 ${
+        isScrolled
+          ? "bg-[#FAF6F2]/90 backdrop-blur-md shadow-sm" // Muncul saat di-scroll
+          : "bg-transparent" // Transparan saat di paling atas
+      }`}
+    >
       {/* Brand Logo / Text */}
-      <Link to="/" className="text-2xl font-bold tracking-[0.2em] text-[#4D342D]">
+      <Link
+        to="/"
+        className="text-2xl font-semibold tracking-[0.2em] text-[#001020]"
+      >
         DADAP BATIK
       </Link>
 
@@ -32,7 +53,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `text-sm font-semibold tracking-wide transition-colors ${
                 isActive
-                  ? "text-[#B8860B]" // Warna emas/cokelat terang untuk active state
+                  ? "text-[#B8860B] underline" // Warna emas/cokelat terang untuk active state
                   : "text-[#5C4D46] hover:text-[#B8860B]"
               }`
             }
@@ -47,7 +68,7 @@ const Navbar = () => {
         <div className="hidden md:block">
           {/* Menggunakan micro-component Button yang sudah kita buat sebelumnya */}
           <Link to="/try-on">
-            <Button variant="primary">TRY ON BATIK</Button>
+            <Button variant="tryOn">TRY ON BATIK</Button>
           </Link>
         </div>
 
@@ -57,9 +78,15 @@ const Navbar = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >
-          <span className={`block w-6 h-0.5 bg-[#4D342D] transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
-          <span className={`block w-6 h-0.5 bg-[#4D342D] transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}></span>
-          <span className={`block w-6 h-0.5 bg-[#4D342D] transition-transform duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+          <span
+            className={`block w-6 h-0.5 bg-[#4D342D] transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}
+          ></span>
+          <span
+            className={`block w-6 h-0.5 bg-[#4D342D] transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}
+          ></span>
+          <span
+            className={`block w-6 h-0.5 bg-[#4D342D] transition-transform duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+          ></span>
         </button>
       </div>
 
@@ -76,9 +103,7 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
             className={({ isActive }) =>
               `px-6 py-3 text-sm font-semibold tracking-wide ${
-                isActive
-                  ? "text-[#B8860B] bg-[#F2E5DD]/50"
-                  : "text-[#5C4D46]"
+                isActive ? "text-[#B8860B] bg-[#F2E5DD]/50" : "text-[#5C4D46]"
               }`
             }
           >
@@ -87,7 +112,9 @@ const Navbar = () => {
         ))}
         <div className="px-6 py-4 md:hidden">
           <Link to="/try-on" onClick={() => setIsMobileMenuOpen(false)}>
-            <Button variant="primary" className="w-full">TRY ON BATIK</Button>
+            <Button className="w-full" variant="tryOn">
+              TRY ON BATIK
+            </Button>
           </Link>
         </div>
       </div>

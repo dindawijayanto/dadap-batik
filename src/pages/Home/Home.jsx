@@ -3,89 +3,101 @@ import HomeHero from "../../components/Sections/HomeHero";
 import AboutSection from "../../components/Sections/AboutSection";
 import HeritageSection from "../../components/Sections/HeritageSection";
 import ProductCard from "../../components/ProductCard/ProductCard";
-import Button from "../../components/UI/Button";
+// import Button from "../../components/UI/Button";
 
 // Dummy data structure, soon to be moved to data/dummyData.js
 const craftItems = [
   {
     title: "Handwritten (Tulis)",
-    status: "BEST SELLER",
-    description: "The peak of the craft. Every line is drawn manually using a 'canting', creating unique patterns, no two are identical.",
-    image: "/REPLACE_IMAGE_HERE",
+    status: "PREMIUM",
+    description:
+      "Puncak dari sebuah karya. Setiap titik dan garisnya di gambar secara manual menggunakan alat yang dinamakan “Canting”. Tidak ada kain yang sama persis ",
+    image: "home/handwritten.png",
+    reverse: true,
   },
   {
     title: "Stamped (Cap)",
-    description: "Created with precision using copper stamps. Cap Tulis combines stamped and manually drawn details for rich textures.",
-    image: "/REPLACE_IMAGE_HERE",
-  }
+    description:
+      "Dibuat menggunakan stempel tembaga yang diukir dengan tangan. Meskipun lebih cepat daripada “Tulis”, metode ini tetap merupakan metode wax-resist yang otentik dengan sentuhan keahlian tradisional.",
+    image: "home/stamped.png",
+    reverse: false,
+  },
 ];
 
 const homeAbout = {
-  tagline: "THE HANDS BEHIND THE CRAFT",
-  headline: "Our Journey: Imam & Family",
+  tagline: "TANGAN DIBALIK SETIAP KARYANYA",
+  headline: "Perjalanan Kami: Imam & Keluarga",
   bodyText: [
-    "Founded in the heart of Central Java, Dadap Batik began as a humble vision by Imam & Family to preserve the traditional canting technique. What started in a small studio has blossomed into a global ambassador for Indonesian heritage.",
-    "For Imam, batik isn't just fabric; it's a profound philosophy. 'Each wax dot is a prayer,' he often says. Today, we nurture a new generation of artisans, ensuring that the rhythmic top-top of the canting never fades from our culture."
+    "Dilahirkan di jantung Jawa Tengah, Dadap Batik berawal dari sebuah impian sederhana Imam Santoso dan istrinya untuk melestarikan seni tradisi menggunakan “canting” yang mulai pudar. Apa yang dulunya berawal dari sebuah studio rumahan kecil, kini telah tumbuh menjadi sebuah galeri yang memiliki banyak motif kain batik. ",
+    "Bagi Pak Imam, batik bukan sekadar selembar kain—melainkan sebuah kanvas filosofis. 'Setiap titikan malam adalah sebuah doa,' ujarnya. Hingga hari ini, mereka terus membimbing generasi perajin baru, memastikan ketukan ritmis 'tap-tap' dari canting tak akan pernah lenyap dari lanskap budaya kita.",
   ],
-  subtext: "Preserving soul, one thread at a time.",
-  image: "/REPLACE_IMAGE_HERE"
+  subtext: "Melestarikan jiwa, benang demi benang.",
+  image: "home/jumbotron.png",
 };
 
 const homeHeritage = {
-  photo: "/REPLACE_IMAGE_HERE",
-  establishedText: "ESTABLISHED 2017",
-  tagline: "Preserving Heritage for 30 Years",
-  headline: "Our Journey to Excellence",
+  photo: "home/established.png",
+  establishedText: "Berdiri Sejak 2019",
+  tagline: "Merajut Warisan Selama 7 Tahun",
+  // headline: "Our Journey to Excellence",
   bodyText: [
-    "At Dadap Batik, every thread tells a story of patience and precision. What began as a small family endeavor in Central Java has grown into a prestigious institution of Indonesian textile art, now officially recognized as a PT (Perseroan Terbatas) entity.",
-    "Our craftsmanship is rooted in the 'canting' tradition, where wax and dye harmonies to create patterns that carry philosophical meanings of life, prosperity, and respect."
+    "Di Dadap Batik, setiap benang menceritakan kisah tentang kesabaran dan ketelitian. Sesuatu yang awalnya hanya sebuah usaha kecil keluarga di Jawa Tengah, kini telah berkembang menjadi instansi tekstil di Indonesia yang bergengsi, dan kini secara resmi diakui sebagai badan hukum berbentuk PT",
+    "Keahlian kami berakar pada tradisi canting, di mana malam dan pewarna berpadu menciptakan motif yang memanggul makna filosofis: kehidupan, kemakmuran, dan penghormatan.",
   ],
   features: [
     {
-      icon: "/REPLACE_ICON_HERE",
-      title: "Legal Authenticity",
-      description: "As a registered PT, we operate with integrity and full adherence."
+      icon: "home/legalitas.svg",
+      title: "Legalitas Resmi",
+      description:
+        "Sebagai PT terdaftar, kami menjamin standar tertinggi integritas perusahaan dan kualitas pengerjaan.",
     },
     {
-      icon: "/REPLACE_ICON_HERE",
-      title: "Artisanal Pedigree",
-      description: "Rooted in centuries-perfected skills passed down."
-    }
+      icon: "home/silsilah.svg",
+      title: "Silsilah Pengrajin",
+      description:
+        "Bertahun tahun menyempurnakan teknik Tulis dan Cap yang diwariskan lintas generasi.",
+    },
   ],
-  ctaText: "READ OUR FULL HERITAGE STORY",
-  ctaLink: "REPLACE_INTERNAL_STORY_LINK"
+  ctaText: "Baca Kisah Warisan Kami Selengkapnya",
+  ctaLink: "REPLACE_INTERNAL_STORY_LINK",
 };
 
 const Home = () => {
   return (
-    <>
+    <div className="relative w-full">
       <HomeHero />
+      <img
+        src="home/batik-pattern.svg"
+        alt="Hero Background Pattern"
+        className="absolute top-0 left-0 w-full h-[100vh] md:h-[100vh] md:w-[120vw] lg:w-[100vw] object-cover object-top pointer-events-none opacity-60 z-10"
+      />
       <AboutSection {...homeAbout} />
       <HeritageSection {...homeHeritage} />
-      
+
       {/* Craftsmanship Section */}
       <section className="py-24 px-6 md:px-16 lg:px-24 bg-[#FAF6F2]">
         <div className="flex flex-col items-center text-center gap-5 max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-[#4D342D] leading-snug">
-            Craftsmanship Beyond Measure
+          <h2 className="text-4xl md:text-5xl font-regular font-serif text-[#001020] leading-snug">
+            Keahlian yang Tak Terukur
           </h2>
-          <p className="text-base text-[#5C4D46] leading-relaxed">
-            From the initial ‘Nyorek’ (design) to the final ‘Lorot’ (wax removal), witness the meticulous steps that transform cotton into a masterpiece.
+          <p className="text-base text-[#001020] leading-relaxed">
+            Dari tahapan ‘Nyangking‘ hingga tahapan ‘Nglorod‘, saksikan setiap
+            tahap teliti yang merubah kain katun halus menjadi sebuah mahakarya.
           </p>
         </div>
-        
+
         {/* Dynamic List of Craft Items */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {craftItems.map((item, index) => (
             <ProductCard key={index} {...item} />
           ))}
         </div>
-        
-        <div className="flex justify-center">
+
+        {/* <div className="flex justify-center">
           <Button variant="secondary">Explore All Techniques</Button>
-        </div>
+        </div> */}
       </section>
-    </>
+    </div>
   );
 };
 
