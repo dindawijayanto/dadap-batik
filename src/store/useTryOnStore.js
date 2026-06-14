@@ -10,6 +10,7 @@ export const useTryOnStore = create((set, get) => ({
   isGenerating: false,
   generationResultUrl: null,
 
+
   setField: (field, value) => set({ [field]: value }),
 
   selectMotif: (motif, imageUrl) => set({
@@ -51,5 +52,18 @@ export const useTryOnStore = create((set, get) => ({
   getModelPath: () => {
     const id = get().getBaseModelId();
     return id ? `/models/${id}.png` : null;
+  },
+
+  getFabricLength: () => {
+    const { clothingType } = get();
+    if (!clothingType) return null;
+
+    const bmi  = get().getBmi();
+    const isLarge = bmi >= 25.0;
+
+    if (clothingType === 'short') {
+      return isLarge ? 1.75 : 1.5;
+    }
+    return isLarge ? 2.25 : 2.0;
   },
 }));

@@ -2,7 +2,11 @@ import { useTryOnStore } from '../../../store/useTryOnStore';
 import { CheckCircle2, Package, MessageCircle, Clock } from 'lucide-react';
 
 export default function ResultSection() {
-  const { isGenerating, generationResultUrl, selectedMotifDetails } = useTryOnStore();
+  const { isGenerating, generationResultUrl, selectedMotifDetails, getFabricLength } = useTryOnStore();
+
+  const fabricLength  = getFabricLength();
+  const basePrice     = selectedMotifDetails?.price ?? 0;
+  const pricePerMeter = fabricLength ? Math.round(basePrice / fabricLength) : 0;
 
   if (!isGenerating && !generationResultUrl) return null;
 
@@ -45,26 +49,38 @@ export default function ResultSection() {
                 </div>
                 
                 {/* Detail List */}
-                <div className="space-y-4 mb-10 text-sm">
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Teknik Dasar</span>
-                        <span className="font-medium text-white">{selectedMotifDetails?.technique || 'Batik Tulis'}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Motif Utama</span>
-                        <span className="font-medium text-[#D4AF37]">{selectedMotifDetails?.name || 'Belum Dipilih'}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Harga Estimasi</span>
-                        <span className="font-medium text-white text-lg">
-                           {selectedMotifDetails ? `Rp ${selectedMotifDetails.price.toLocaleString('id-ID')}` : '-'}
-                        </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Panjang Kain</span>
-                        <span className="font-medium text-white">Sesuai Pola Baju</span>
-                    </div>
-                </div>
+                 <div className="space-y-4 mb-10 text-sm">
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Teknik Dasar</span>
+                         <span className="font-medium text-white">{selectedMotifDetails?.technique || 'Batik Tulis'}</span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Motif Utama</span>
+                         <span className="font-medium text-[#D4AF37]">{selectedMotifDetails?.name || 'Belum Dipilih'}</span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Panjang Kain</span>
+                         <span className="font-medium text-white">
+                             {fabricLength != null ? `${fabricLength} m` : '-'}
+                         </span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Harga per Meter</span>
+                         <span className="font-medium text-white">
+                             {selectedMotifDetails && fabricLength != null
+                                 ? `Rp ${pricePerMeter.toLocaleString('id-ID')} / m`
+                                 : '-'}
+                         </span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Harga Estimasi</span>
+                         <span className="font-medium text-white text-lg">
+                             {selectedMotifDetails
+                                 ? `Rp ${basePrice.toLocaleString('id-ID')}`
+                                 : '-'}
+                         </span>
+                     </div>
+                 </div>
 
                 {/* Estimas Waktu Box */}
                 <div className="bg-[#2D2D2D] border border-gray-700 p-5 rounded-xl mb-8 flex items-center gap-4">

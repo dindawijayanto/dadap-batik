@@ -36,12 +36,7 @@ const buildPrompt = (gender, clothingType) => {
 };
 
 export const generateBatikMockup = async (fabricFile, modelFile, gender, clothingType) => {
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash-image",
-    generationConfig: {
-      thinkingConfig: { thinkingBudget: 0 },
-    },
-  });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
 
   const [fabricPart, modelPart] = await Promise.all([
     fileToGenerativePart(fabricFile),
