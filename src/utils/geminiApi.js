@@ -18,6 +18,15 @@ const fileToGenerativePart = async (fileOrUrl) => {
     mimeType = fileOrUrl.type;
   }
 
+  if (blob.type === 'text/html' || !mimeType.startsWith('image/')) {
+    throw new Error(`File yang dimuat bukan gambar yang valid (tipe: ${mimeType}). Pastikan URL gambar benar: ${typeof fileOrUrl === 'string' ? fileOrUrl : 'File Upload'}`);
+  }
+
+  // Jika ukuran terlalu besar (misal > 4MB), API Gemini sering error 500.
+  if (blob.size > 4 * 1024 * 1024) {
+    console.warn(`[Gemini] Gambar cukup besar (${(blob.size / 1024 / 1024).toFixed(2)} MB). Ini berisiko menyebabkan error 500 di Gemini.`);
+  }
+
   const data = await new Promise((resolve, reject) => {
     const reader     = new FileReader();
     reader.onloadend = () => resolve(reader.result.split(',')[1]);

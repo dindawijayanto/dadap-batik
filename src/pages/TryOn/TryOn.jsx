@@ -8,14 +8,7 @@ import MotifSelector    from './components/MotifSelector';
 import ResultSection    from './components/ResultSection';
 import { generateBatikMockup } from '../../utils/geminiApi';
 
-const urlToFile = async (url, filename, mimeType) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Gagal mengunduh file (${response.status}): ${url}`);
-  }
-  const buffer = await response.arrayBuffer();
-  return new File([buffer], filename, { type: mimeType });
-};
+
 
 export default function TryOnPage() {
   const {
@@ -44,12 +37,12 @@ export default function TryOnPage() {
       const modelId   = getBaseModelId();
       const modelPath = `/models/${modelId}.png`;
 
-      const [motifFile, modelFile] = await Promise.all([
-        urlToFile(selectedMotifDetails.imageUrl, 'motif.jpg', 'image/jpeg'),
-        urlToFile(modelPath, `${modelId}.png`, 'image/png'),
-      ]);
-
-      const resultBase64 = await generateBatikMockup(motifFile, modelFile, gender, clothingType);
+      const resultBase64 = await generateBatikMockup(
+        selectedMotifDetails.imageUrl, 
+        modelPath, 
+        gender, 
+        clothingType
+      );
       setField('generationResultUrl', resultBase64);
 
     } catch (error) {
