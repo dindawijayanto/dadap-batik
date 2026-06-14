@@ -69,7 +69,7 @@ const ProcessAccordion = () => {
           const IconComponent = item.icon;
 
           return (
-            <div className="flex gap-4 rounded-sm w-full bg-linear-to-r from-5% to-80% from-[#B2993D] to-[#001020] p-6 text-[#FFE6D3] font-dm-sans">
+            <div key={index} className="flex gap-4 rounded-sm w-full bg-linear-to-r from-5% to-80% from-[#B2993D] to-[#001020] p-6 text-[#FFE6D3] font-dm-sans">
               <div className={`flex justify-center items-center p-6 bg-[${item.color}]`}>
                 <IconComponent size={24}/>
               </div>

@@ -59,7 +59,7 @@ const homeHeritage = {
     },
   ],
   ctaText: "Baca Kisah Warisan Kami Selengkapnya",
-  ctaLink: "REPLACE_INTERNAL_STORY_LINK",
+  ctaLink: "our-story",
 };
 
 const Home = () => {

@@ -44,12 +44,12 @@ const AboutSection = ({
             ))}
           </div>
           {subtext && (
-            <p
+            <div
               className={`text-lg flex flex-row gap-8 font-serif items-center ${reverse ? "text-[#5C4D46]" : "text-[#FFE6D3] opacity-80"}`}
             >
               <div className="w-[60px] h-[2px] bg-[#FFE6D3]"></div>
               {subtext}
-            </p>
+            </div>
           )}
         </div>
       </div>
