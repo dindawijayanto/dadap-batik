@@ -14,6 +14,7 @@ const craftItems = [
       "Puncak dari sebuah karya. Setiap titik dan garisnya di gambar secara manual menggunakan alat yang dinamakan “Canting”. Tidak ada kain yang sama persis ",
     image: "home/handwritten.png",
     reverse: true,
+    link: "/process",
   },
   {
     title: "Stamped (Cap)",
@@ -21,6 +22,7 @@ const craftItems = [
       "Dibuat menggunakan stempel tembaga yang diukir dengan tangan. Meskipun lebih cepat daripada “Tulis”, metode ini tetap merupakan metode wax-resist yang otentik dengan sentuhan keahlian tradisional.",
     image: "home/stamped.png",
     reverse: false,
+    link: "/process",
   },
 ];
 
@@ -59,7 +61,7 @@ const homeHeritage = {
     },
   ],
   ctaText: "Baca Kisah Warisan Kami Selengkapnya",
-  ctaLink: "REPLACE_INTERNAL_STORY_LINK",
+  ctaLink: "/our-story",
 };
 
 const Home = () => {

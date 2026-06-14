@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Button from "../UI/Button"; // Pastikan Button dari slice sebelumnya sudah ada
+import Button from "../UI/Button"; 
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,7 +18,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Menyimpan data navigasi di dalam array agar lebih rapi (DRY Principle)
   const navLinks = [
     { name: "BERANDA", path: "/" },
     { name: "KISAH KAMI", path: "/our-story" },
@@ -32,8 +31,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 px-6 md:px-12 lg:px-24 py-5 flex items-center justify-between transition-all duration-300 ${
         isScrolled
-          ? "bg-[#FAF6F2]/90 backdrop-blur-md shadow-sm" // Muncul saat di-scroll
-          : "bg-transparent" // Transparan saat di paling atas
+          ? "bg-[#FAF6F2]/80 backdrop-blur-lg shadow-sm" 
+          : "bg-transparent" 
       }`}
     >
       {/* Brand Logo / Text */}
@@ -44,17 +43,18 @@ const Navbar = () => {
         DADAP BATIK
       </Link>
 
-      {/* Desktop Navigation (Pill Menu) */}
-      <div className="hidden lg:flex items-center bg-[#FDF9F6] shadow-[0_2px_10px_rgba(0,0,0,0.03)] rounded-full px-8 py-3 gap-8 border border-[#F2E5DD]">
+      {/* Desktop Navigation (Pill Menu with Glassmorphism) */}
+      <div className="hidden lg:flex items-center bg-white/40 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.04)] rounded-full px-10 py-3 gap-8 border border-white/60">
         {navLinks.map((link, index) => (
           <NavLink
             key={index}
             to={link.path}
             className={({ isActive }) =>
-              `text-sm font-semibold tracking-wide transition-colors ${
+              // Mengubah font-bold menjadi font-normal agar Be Vietnam Pro menggunakan weight Regular (400)
+              `relative text-[14px] font-normal tracking-widest transition-colors py-1 ${
                 isActive
-                  ? "text-[#B8860B] underline" // Warna emas/cokelat terang untuk active state
-                  : "text-[#5C4D46] hover:text-[#B8860B]"
+                  ? "text-[#A87B1E] after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2.5px] after:bg-[#A87B1E]"
+                  : "text-[#001020] hover:text-[#A87B1E]"
               }`
             }
           >
@@ -66,7 +66,6 @@ const Navbar = () => {
       {/* CTA Button & Mobile Toggle */}
       <div className="flex items-center gap-4">
         <div className="hidden md:block">
-          {/* Menggunakan micro-component Button yang sudah kita buat sebelumnya */}
           <Link to="/try-on">
             <Button variant="tryOn">TRY ON BATIK</Button>
           </Link>
@@ -79,13 +78,13 @@ const Navbar = () => {
           aria-label="Toggle mobile menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-[#4D342D] transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}
+            className={`block w-6 h-0.5 bg-[#001020] transition-transform duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}
           ></span>
           <span
-            className={`block w-6 h-0.5 bg-[#4D342D] transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}
+            className={`block w-6 h-0.5 bg-[#001020] transition-opacity duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}
           ></span>
           <span
-            className={`block w-6 h-0.5 bg-[#4D342D] transition-transform duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+            className={`block w-6 h-0.5 bg-[#001020] transition-transform duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
           ></span>
         </button>
       </div>
@@ -102,8 +101,9 @@ const Navbar = () => {
             to={link.path}
             onClick={() => setIsMobileMenuOpen(false)}
             className={({ isActive }) =>
-              `px-6 py-3 text-sm font-semibold tracking-wide ${
-                isActive ? "text-[#B8860B] bg-[#F2E5DD]/50" : "text-[#5C4D46]"
+              // Mengubah versi mobile menjadi font-normal juga
+              `px-6 py-3 text-sm font-normal tracking-widest ${
+                isActive ? "text-[#A87B1E] bg-[#F2E5DD]/50 border-l-4 border-[#A87B1E]" : "text-[#001020]"
               }`
             }
           >

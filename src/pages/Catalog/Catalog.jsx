@@ -6,9 +6,9 @@ import { supabase } from "../../utils/supabase";
 
 const filters = [
   "jenis batik",
-  "Geometris (KAWUNG)",
-  "ORGANIS (PARANG)",
-  "Pesisir (MEGA MENDUNG)",
+  "TULIS (HANDWRITTEN)",
+  "CAP (STAMPED)",
+  "KOMBINASI (COMBINED)",
 ];
 
 const Catalog = () => {
