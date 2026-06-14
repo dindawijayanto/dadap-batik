@@ -94,12 +94,12 @@ const ContactFormSection = () => {
           <div className="bg-[#FFEAD7] p-8 md:p-10 rounded-sm flex flex-col gap-5 shadow-sm">
             <h3 className="text-[11px] font-bold tracking-widest text-[#1A1A1A] uppercase mb-1">Ikuti Kami Di Media Sosial</h3>
             
-            <a href="https://www.instagram.com/dadapbatikbatu?igsh=MW41eGlzYXQxNGt4MQ==" target="_blank" rel="noreferrer" className="flex items-center justify-between bg-white px-5 py-4 rounded-sm border border-transparent hover:border-[#B5914A] transition-all group shadow-sm">
+            <a href="https://www.instagram.com/dadapbatikbatu" target="_blank" rel="noreferrer" className="flex items-center justify-between bg-white px-5 py-4 rounded-sm border border-transparent hover:border-[#B5914A] transition-all group shadow-sm">
               <span className="text-[13px] font-medium text-[#1A1A1A]">Instagram</span>
               <svg className="w-4 h-4 text-[#1A1A1A] group-hover:text-[#B5914A] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
             
-            <a href="https://www.tiktok.com/@dadapbatikbatu?_r=1&_t=ZS-97CO6v3S29l" target="_blank" rel="noreferrer" className="flex items-center justify-between bg-white px-5 py-4 rounded-sm border border-transparent hover:border-[#B5914A] transition-all group shadow-sm">
+            <a href="https://www.tiktok.com/@dadapbatikbatu" target="_blank" rel="noreferrer" className="flex items-center justify-between bg-white px-5 py-4 rounded-sm border border-transparent hover:border-[#B5914A] transition-all group shadow-sm">
               <span className="text-[13px] font-medium text-[#1A1A1A]">Tiktok</span>
               <svg className="w-4 h-4 text-[#1A1A1A] group-hover:text-[#B5914A] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
