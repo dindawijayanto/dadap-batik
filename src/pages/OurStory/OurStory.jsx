@@ -2,7 +2,7 @@ import StoryHero from "./components/StoryHero";
 import StoryStats from "./components/StoryStats";
 import StoryQuote from "./components/StoryQuote";
 import StoryTimeline from "./components/StoryTimeline";
-import CTA from "../../components/Sections/CTA";
+import StoryCTA from "./components/StoryCTA";
 
 const timelineData = [
   {
@@ -26,14 +26,14 @@ const timelineData = [
 ];
 
 const ctaData = {
-  title: "Create Your Own Legacy",
-  description: "From bridal party ensembles to corporate gifts, our masters can translate your vision into hand-drawn Batik perfection.",
+  title: "Tuliskan Warisanmu Sendiri",
+  description: "Dari busana pernikahan hingga cendera mata korporat, kami siap menerjemahkan visimu menjadi karya batik tulis yang tak tertandingi.",
   primaryBtn: {
-    text: "Inquire Custom Order",
-    link: "/contact" // Ganti dengan rute yang sesuai
+    text: "Pesan Batik Eksklusif",
+    link: "/contact"
   },
   secondaryBtn: {
-    text: "Book a Workshop",
+    text: "Daftar Sesi Workshop",
     link: "/contact"
   }
 };
@@ -45,7 +45,7 @@ const OurStory = () => {
       <StoryStats />
       <StoryQuote />
       <StoryTimeline timelineData={timelineData} />
-      <CTA {...ctaData} />
+      <StoryCTA {...ctaData} />
     </div>
   );
 };
