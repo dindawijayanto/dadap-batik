@@ -39,7 +39,7 @@ const ContactWorkshop = () => {
               href="REPLACE_WORKSHOP_BOOKING_LINK" 
               className="text-sm font-bold text-[#4D342D] border-b border-[#4D342D] pb-1 hover:text-[#A88877] hover:border-[#A88877] transition-all uppercase tracking-widest"
             >
-              Book A Private Session →
+              Book A Private Session Here →
             </a>
           </div>
         </div>
