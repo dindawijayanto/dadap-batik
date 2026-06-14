@@ -11,7 +11,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        {/* Halaman Home */}
+        {/* Halaman  Home */}
         <Route index element={<Home />} />
         
         {/* Halaman Catalog (The Heritage Collection) */}

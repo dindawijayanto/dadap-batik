@@ -5,10 +5,9 @@ import CatalogModal from "../../components/ProductCard/CatalogModal";
 import { supabase } from "../../utils/supabase";
 
 const filters = [
-  "jenis batik",
-  "Geometris (KAWUNG)",
-  "ORGANIS (PARANG)",
-  "Pesisir (MEGA MENDUNG)",
+  "Tulis",
+  "Cap",
+  "Kombinasi",
 ];
 
 const Catalog = () => {
