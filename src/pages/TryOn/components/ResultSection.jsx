@@ -2,24 +2,30 @@ import { useTryOnStore } from '../../../store/useTryOnStore';
 import { CheckCircle2, Package, MessageCircle, Clock } from 'lucide-react';
 
 export default function ResultSection() {
-  const { isGenerating, generationResultUrl, selectedMotifDetails } = useTryOnStore();
+  const { isGenerating, generationResultUrl, selectedMotifDetails, getFabricLength } = useTryOnStore();
+
+  const fabricLength  = getFabricLength();
+  const basePrice     = selectedMotifDetails?.price ?? 0;
+  const pricePerMeter = fabricLength ? Math.round(basePrice / fabricLength) : 0;
 
   if (!isGenerating && !generationResultUrl) return null;
 
   return (
     <section className="py-16 border-t border-[#E8E0D5] mt-12 bg-white rounded-t-[50px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <p className="text-center text-[#D4AF37] text-xs font-semibold tracking-widest uppercase mb-1">
-          Hasil Rancangan Untukmu
-        </p>
-        <h2 className="text-4xl md:text-5xl font-serif text-center text-[#2D241B] mb-12">
-          Inilah Dirimu, Terwujud dalam Batik
-        </h2>
+        <div className='flex flex-col gap-4'>
+          <p className="text-center text-[#D4AF37] text-xs font-semibold tracking-widest uppercase mb-1">
+            Hasil Rancangan Untukmu
+          </p>
+          <h2 className="text-4xl md:text-5xl font-serif text-center text-[#2D241B] mb-12">
+            Inilah Dirimu, Terwujud dalam Batik
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
           
           {/* KOLOM KIRI: Large Generated Image (w-full, h-large) */}
-          <div className="md:col-span-7 rounded-2xl overflow-hidden bg-[#1A1A1A] aspect-[3/4] flex items-center justify-center relative shadow-3xl">
+          <div className="md:col-span-7 rounded-2xl overflow-hidden bg-transparent aspect-[3/4] flex items-center justify-center relative shadow-3xl">
             {isGenerating ? (
               <div className="flex flex-col items-center gap-6">
                  <div className="w-20 h-20 border-4 border-[#D4AF37] border-t-transparent rounded-full animate-spin"></div>
@@ -29,7 +35,7 @@ export default function ResultSection() {
               <img 
                 src={generationResultUrl} 
                 alt="Hasil Try On" 
-                className="w-full h-full object-cover fade-in"
+                className="w-full h-full object-contain fade-in"
               />
             )}
           </div>
@@ -43,26 +49,38 @@ export default function ResultSection() {
                 </div>
                 
                 {/* Detail List */}
-                <div className="space-y-4 mb-10 text-sm">
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Teknik Dasar</span>
-                        <span className="font-medium text-white">{selectedMotifDetails?.technique || 'Batik Tulis'}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Motif Utama</span>
-                        <span className="font-medium text-[#D4AF37]">{selectedMotifDetails?.name || 'Belum Dipilih'}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Harga Estimasi</span>
-                        <span className="font-medium text-white text-lg">
-                           {selectedMotifDetails ? `Rp ${selectedMotifDetails.price.toLocaleString('id-ID')}` : '-'}
-                        </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-400">Panjang Kain</span>
-                        <span className="font-medium text-white">Sesuai Pola Baju</span>
-                    </div>
-                </div>
+                 <div className="space-y-4 mb-10 text-sm">
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Teknik Dasar</span>
+                         <span className="font-medium text-white">{selectedMotifDetails?.technique || 'Batik Tulis'}</span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Motif Utama</span>
+                         <span className="font-medium text-[#D4AF37]">{selectedMotifDetails?.name || 'Belum Dipilih'}</span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Panjang Kain</span>
+                         <span className="font-medium text-white">
+                             {fabricLength != null ? `${fabricLength} m` : '-'}
+                         </span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Harga per Meter</span>
+                         <span className="font-medium text-white">
+                             {selectedMotifDetails && fabricLength != null
+                                 ? `Rp ${pricePerMeter.toLocaleString('id-ID')} / m`
+                                 : '-'}
+                         </span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                         <span className="text-gray-400">Harga Estimasi</span>
+                         <span className="font-medium text-white text-lg">
+                             {selectedMotifDetails
+                                 ? `Rp ${basePrice.toLocaleString('id-ID')}`
+                                 : '-'}
+                         </span>
+                     </div>
+                 </div>
 
                 {/* Estimas Waktu Box */}
                 <div className="bg-[#2D2D2D] border border-gray-700 p-5 rounded-xl mb-8 flex items-center gap-4">
@@ -77,7 +95,7 @@ export default function ResultSection() {
                 {/* WA Button */}
                 <button 
                     disabled={isGenerating || !generationResultUrl}
-                    className="w-full bg-transparent border-2 border-gray-600 hover:border-[#D4AF37] hover:text-[#D4AF37] text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="w-full bg-transparent border-2 border-gray-600 hover:border-[#25d366] hover:bg-[#25d36620] cursor-pointer text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                     <MessageCircle size={20} />
                     Pesan via WhatsApp
@@ -90,11 +108,11 @@ export default function ResultSection() {
                 <div className="space-y-6">
                     <div className="flex gap-4 items-start">
                         <CheckCircle2 className="text-[#D4AF37] flex-shrink-0 mt-1" size={20} />
-                        <p className="text-sm text-[#594A3C]">**Sketsa Awal:** Dalam 7 hari, desainer utama kami akan mengirimkan sketsa untuk kamu tinjau dan setujui.</p>
+                        <p className="text-sm text-[#594A3C]"><strong>Sketsa Awal:</strong> Dalam 7 hari, desainer utama kami akan mengirimkan sketsa untuk kamu tinjau dan setujui.</p>
                     </div>
                     <div className="flex gap-4 items-start">
                         <div className="w-5 h-5 rounded-full border-2 border-gray-400 text-gray-500 flex items-center justify-center text-xs flex-shrink-0 mt-1">02</div>
-                        <p className="text-sm text-[#594A3C]">**Proses Pelilinan:** Setelah disetujui, kain langsung masuk ke tahap pembatikan menggunakan canting dan malam.</p>
+                        <p className="text-sm text-[#594A3C]"><strong>Proses Pelilinan:</strong> Setelah disetujui, kain langsung masuk ke tahap pembatikan menggunakan canting dan malam.</p>
                     </div>
                 </div>
             </div>
