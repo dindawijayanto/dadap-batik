@@ -5,14 +5,8 @@ import CatalogModal from "../../components/ProductCard/CatalogModal";
 import { supabase } from "../../utils/supabase";
 
 const filters = [
-<<<<<<< HEAD
-  "jenis batik",
-  "Batik Tulis",
-  "Batik Cap",
-=======
   "Tulis",
   "Cap",
->>>>>>> 39bb75a44f72c632ddaf1347d8984435246bf569
   "Kombinasi",
 ];
 
