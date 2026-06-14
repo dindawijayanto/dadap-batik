@@ -1,11 +1,13 @@
 const ContactFormSection = () => {
   return (
     <section className="py-12 px-6 md:px-12 lg:px-24 bg-[#FAF6F2]">
+      {/* Container utama menggunakan grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
         
-        {/* Left: Inquiry Form (Gradasi Emas di Kiri Atas, Gelap Dominan) */}
-        <div className="lg:col-span-2 bg-gradient-to-br from-[#B2993D] via-[#001020] via-100% to-[#001020] p-8 md:p-14 rounded-sm shadow-lg">
-          <h2 className="text-[28px] font-serif text-[#EFEAE4] mb-12">Formulir Pertanyaan</h2>
+        {/* KIRI: Inquiry Form */}
+        {/* TAMBAHAN: h-full agar tingginya tegas menempati seluruh ruang baris */}
+        <div className="lg:col-span-2 bg-gradient-to-br from-[#B2993D] via-[#001020] via-100% to-[#001020] p-8 md:p-14 rounded-sm shadow-lg h-full flex flex-col">
+          <h2 className="text-[28px] font-serif text-[#EFEAE4] mb-10 md:mb-12">Formulir Pertanyaan</h2>
           
           <form className="flex flex-col gap-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8">
@@ -57,7 +59,6 @@ const ContactFormSection = () => {
             <div className="mt-4">
               <button 
                 type="button" 
-                // Tombol diubah menjadi gelap (#001020) sesuai gambar
                 className="bg-[#001020] text-[#EFEAE4] text-[11px] font-bold tracking-widest uppercase py-3.5 px-8 rounded-sm hover:bg-[#B2993D] transition-colors w-full sm:w-auto"
               >
                 Kirim Pesan
@@ -66,8 +67,9 @@ const ContactFormSection = () => {
           </form>
         </div>
 
-        {/* Right: Quick Contacts & Socials */}
-        <div className="flex flex-col gap-8">
+        {/* KANAN: Quick Contacts & Socials */}
+        {/* TAMBAHAN: h-full dan justify-between adalah kunci agar sejajar atas-bawah! */}
+        <div className="flex flex-col gap-8 h-full justify-between">
           
           {/* Direct Artisan Line */}
           <div className="bg-[#FFEAD7] p-8 md:p-10 rounded-sm text-[#001020] flex flex-col gap-5 shadow-sm">

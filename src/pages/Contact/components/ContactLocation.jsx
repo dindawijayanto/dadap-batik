@@ -1,33 +1,31 @@
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { useMemo } from "react";
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css'; // Wajib di-import agar peta tidak berantakan
+import L from 'leaflet';
 
-// PENTING: Ganti dengan API Key Google Maps kamu
-const GOOGLE_MAPS_API_KEY = "MASUKKAN_API_KEY_ANDA_DI_SINI"; 
+// --- PERBAIKAN ICON DEFAULT LEAFLET DI VITE ---
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41]
+});
+L.Marker.prototype.options.icon = DefaultIcon;
+// ----------------------------------------------
 
 const ContactLocation = () => {
   // Koordinat disesuaikan ke area Jl. Pronoyudo, Dau, Kota Batu
-  const center = useMemo(() => ({ lat: -7.9206, lng: 112.5489 }), []);
-
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
-  });
-
-  const options = {
-    disableDefaultUI: true, 
-    zoomControl: true, 
-  };
+  const position = [-7.9206, 112.5489];
 
   return (
     <section className="py-16 px-6 md:px-12 lg:px-24 bg-[#FAF6F2]">
-      {/* Parent Container: 
-        Menghapus background dan border dari sini. 
-        Menggunakan items-stretch agar tinggi card kiri dan kanan sejajar di layar besar.
-      */}
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-6 lg:gap-8">
         
         {/* CARD KIRI: Informasi Galeri (Dark Theme) */}
-        <div className="flex-1 bg-gradient-to-br from-[#4A452E] via-[#001020] via-60% to-[#001020] p-10 md:p-14 rounded-sm flex flex-col justify-center text-[#EFEAE4] shadow-lg">
+        {/* Tambahan z-10 agar selalu berada di atas peta saat di layar kecil */}
+        <div className="flex-1 bg-gradient-to-br from-[#4A452E] via-[#001020] via-60% to-[#001020] p-10 md:p-14 rounded-sm flex flex-col justify-center text-[#EFEAE4] shadow-lg relative z-10">
           <h2 className="text-[28px] font-serif mb-8 text-[#EFEAE4]">Galeri Kami</h2>
           
           <div className="flex flex-col gap-1 text-[13px] leading-relaxed mb-10 text-[#EFEAE4]/80">
@@ -47,23 +45,22 @@ const ContactLocation = () => {
           </div>
         </div>
 
-        {/* CARD KANAN: Integrasi Google Maps */}
-        <div className="flex-[1.5] w-full min-h-[350px] lg:min-h-[450px] rounded-sm overflow-hidden shadow-lg relative bg-[#E6DDD6]">
-          {isLoaded ? (
-            <GoogleMap
-              mapContainerClassName="w-full h-full absolute inset-0"
-              center={center}
-              zoom={16}
-              options={options}
-            >
-              {/* Kamu bisa custom icon Marker di sini nanti */}
-              <Marker position={center} />
-            </GoogleMap>
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-[#5C4D46] font-semibold tracking-widest text-sm animate-pulse">
-              MEMUAT PETA...
-            </div>
-          )}
+        {/* CARD KANAN: Integrasi Peta Leaflet */}
+        {/* z-0 sangat penting agar peta leaflet tidak menembus navbar/modal kamu */}
+        <div className="flex-[1.5] w-full min-h-[350px] lg:min-h-[450px] rounded-sm overflow-hidden shadow-lg relative bg-[#E6DDD6] z-0">
+          <MapContainer 
+            center={position} 
+            zoom={16} 
+            scrollWheelZoom={false} // Mencegah peta ter-zoom tidak sengaja saat user men-scroll web ke bawah
+            className="w-full h-full absolute inset-0"
+          >
+            {/* Menggunakan sumber peta gratis dari OpenStreetMap */}
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={position}></Marker>
+          </MapContainer>
         </div>
 
       </div>
