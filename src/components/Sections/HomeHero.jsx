@@ -27,8 +27,12 @@ const HomeHero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-2 ">
+          <link to="/catalog">
           <Button variant="tryOn">Explore Collection</Button>
+          </link>
+          <link to="/try-on">
           <Button variant="secondary">Try On Batik</Button>
+          </link>
         </div>
       </div>
     </section>
