@@ -21,24 +21,24 @@ const HeritageSection = ({
             alt="Workshop Photo"
             className="w-full md:w-4/5 h-full object-cover justify-center mx-auto"
           />
-          <div className="absolute -top-4 left-0 md:left-12 bg-gradient-to-r from-[#B2993D] to-[#001020] px-4 py-2 text-[#FFE6D3]">
-            <h4 className="leading-[1.1]">PARA PENDIRI</h4>
-            <span className="text-md font-serif">Imam & Yuni</span>
+          <div className="absolute -top-4 left-0 md:left-12 bg-gradient-to-r from-[#B2993D] to-[#001020] tracking-widest px-4 py-2 text-[#FFE6D3]">
+            <h4 className="leading-[1.1] font-dm-sans">PARA PENDIRI</h4>
+            <span className="text-md font-noto-serif">Imam & Yuni</span>
           </div>
         </div>
 
         {/* Details side */}
         <div className="flex-1 flex flex-col gap-10 items-start">
           <div className="flex flex-col gap-3">
-            <span className="text-base px-4 max-w-[227px] rounded-2xl font-semibold text-[#FFE6D3] bg-[#B2993D] py-2 tracking-[2px] uppercase">
+            <span className="text-center text-base px-4 max-w-[227px] rounded-full font-semibold text-[#FFE6D3] bg-[#B2993D] py-2 tracking-[2px] uppercase">
               {establishedText}
             </span>
-            <span className="text-2xl text-[#001020]">{tagline}</span>
+            <span className="text-2xl text-[#001020] font-noto-serif">{tagline}</span>
           </div>
 
           {/* <h2 className="text-4xl md:text-5xl font-bold font-serif text-[#4D342D] leading-snug">{headline}</h2> */}
 
-          <div className="space-y-4 text-base text-[#001020]">
+          <div className="space-y-4 text-base text-[#001020] font-dm-sans">
             {bodyText.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
@@ -54,7 +54,7 @@ const HeritageSection = ({
           {/* CTA Link - Placeholder link */}
           <a
             href={ctaLink}
-            className="text-[#001020] text-base font-medium hover:text-[#4D342D] underline uppercase"
+            className="text-[#001020] font-dm-sans text-base font-medium hover:text-[#4D342D] underline uppercase"
           >
             {ctaText} →
           </a>

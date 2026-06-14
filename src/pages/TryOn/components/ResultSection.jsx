@@ -8,6 +8,23 @@ export default function ResultSection() {
   const basePrice     = selectedMotifDetails?.price ?? 0;
   const pricePerMeter = fabricLength ? Math.round(basePrice / fabricLength) : 0;
 
+  const generateWaLink = () => {
+    const phone = "6281334555825";
+    const technique = selectedMotifDetails?.technique || 'Batik Tulis';
+    const motif = selectedMotifDetails?.name || 'Belum Dipilih';
+    const length = fabricLength != null ? `${fabricLength} m` : '-';
+    const price = selectedMotifDetails ? `Rp ${basePrice.toLocaleString('id-ID')}` : '-';
+
+    const message = `Halo, saya tertarik untuk memesan batik custom di Dadap Batik dengan detail berikut:\n\n` +
+      `- Teknik Dasar: ${technique}\n` +
+      `- Motif Utama: ${motif}\n` +
+      `- Panjang Kain: ${length}\n` +
+      `- Harga Estimasi: ${price}\n\n` +
+      `Mohon informasi lebih lanjut terkait pemesanan ini. Terima kasih.`;
+
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  };
+
   if (!isGenerating && !generationResultUrl) return null;
 
   return (
@@ -94,6 +111,7 @@ export default function ResultSection() {
                 
                 {/* WA Button */}
                 <button 
+                    onClick={() => window.open(generateWaLink(), '_blank')}
                     disabled={isGenerating || !generationResultUrl}
                     className="w-full bg-transparent border-2 border-gray-600 hover:border-[#25d366] hover:bg-[#25d36620] cursor-pointer text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                 >

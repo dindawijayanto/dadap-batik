@@ -6,8 +6,8 @@ const FeatureCard = ({ icon, title, description }) => {
         <img src={icon} alt={`${title} Icon`} className="w-full h-auto" />
       </div>
       <div className="flex flex-col gap-2 flex-grow">
-        <h4 className="text-sm font-semibold text-[#FFE6D3]">{title}</h4>
-        <p className="text-xs text-[#FFE6D3] leading-relaxed line-clamp-3">
+        <h4 className="text-sm font-noto-serif font-semibold text-[#FFE6D3]">{title}</h4>
+        <p className="text-xs text-[#FFE6D3] font-dm-sans leading-relaxed line-clamp-3">
           {description}
         </p>
       </div>

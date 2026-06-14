@@ -1,11 +1,8 @@
-/* The complete Home page assembly */
 import HomeHero from "../../components/Sections/HomeHero";
 import AboutSection from "../../components/Sections/AboutSection";
 import HeritageSection from "../../components/Sections/HeritageSection";
 import ProductCard from "../../components/ProductCard/ProductCard";
-// import Button from "../../components/UI/Button";
 
-// Dummy data structure, soon to be moved to data/dummyData.js
 const craftItems = [
   {
     title: "Handwritten (Tulis)",
@@ -77,10 +74,10 @@ const Home = () => {
       {/* Craftsmanship Section */}
       <section className="py-24 px-6 md:px-16 lg:px-24 bg-[#FAF6F2]">
         <div className="flex flex-col items-center text-center gap-5 max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-regular font-serif text-[#001020] leading-snug">
+          <h2 className="text-4xl md:text-5xl font-regular font-noto-serif text-[#001020] leading-snug">
             Keahlian yang Tak Terukur
           </h2>
-          <p className="text-base text-[#001020] leading-relaxed">
+          <p className="text-base text-[#001020] leading-relaxed font-dm-sans">
             Dari tahapan ‘Nyangking‘ hingga tahapan ‘Nglorod‘, saksikan setiap
             tahap teliti yang merubah kain katun halus menjadi sebuah mahakarya.
           </p>

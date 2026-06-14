@@ -6,9 +6,9 @@ import { supabase } from "../../utils/supabase";
 
 const filters = [
   "jenis batik",
-  "Geometris (KAWUNG)",
-  "ORGANIS (PARANG)",
-  "Pesisir (MEGA MENDUNG)",
+  "Batik Tulis",
+  "Batik Cap",
+  "Kombinasi",
 ];
 
 const Catalog = () => {
@@ -118,10 +118,10 @@ const Catalog = () => {
     <div className="bg-[#FAF6F2] min-h-screen pt-32 pb-24 px-6 md:px-16 lg:px-24">
       {/* Header Section */}
       <div className="max-w-3xl mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold font-serif text-[#001020] mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold font-noto-serif text-[#001020] mb-4">
           Koleksi Warisan
         </h1>
-        <p className="text-[#001020] leading-relaxed text-sm md:text-base max-w-2xl">
+        <p className="text-[#001020] font-dm-sans leading-relaxed text-sm md:text-base max-w-2xl">
           Eksplorasi batik cap dan batik tulis pilihan kami. Setiap karya
           merupakan kanvas yang memuat filosofi Jawa, yang dibuat secara teliti
           selama berbulan-bulan oleh para pengrajin lokal.

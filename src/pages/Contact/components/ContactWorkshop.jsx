@@ -27,18 +27,19 @@ const ContactWorkshop = () => {
 
         {/* Kolom Kanan: Text Details */}
         <div className="flex-1 flex flex-col justify-center pt-16 lg:pt-0">
-          <span className="text-[11px] font-bold tracking-[0.2em] text-[#A87B1E] uppercase mb-5 block">
+          <span className="text-[11px] font-dm-sans font-bold tracking-[0.2em] text-[#A87B1E] uppercase mb-5 block">
             Pengalaman Di Balik Layar
           </span>
-          <h2 className="text-[32px] md:text-[40px] lg:text-[46px] font-serif text-[#001020] leading-[1.15] mb-6 font-medium">
+          <h2 className="text-[32px] md:text-[40px] lg:text-[46px] font-noto-serif text-[#001020] leading-[1.15] mb-6 font-medium">
             Rasakan sendiri prosesnya.
           </h2>
-          <p className="text-[15px] text-[#001020]/80 leading-relaxed max-w-[480px] mb-10">
+          <p className="text-[15px] text-[#001020]/80 font-dm-sans leading-relaxed max-w-[480px] mb-10">
             Galeri kami bukan sekadar tempat produksi, ia adalah museum yang hidup. Kami membuka sesi privat bagi siapa saja yang ingin memahami jiwa dan filosofi di balik setiap lembar batik.
           </p>
           <div>
             <a 
-              href="REPLACE_WORKSHOP_BOOKING_LINK" 
+              target="_blank"
+              href="https://wa.me/6281334555825?text=Halo%2C%20saya%20tertarik%20untuk%20mengikuti%20sesi%20workshop%20privat%20di%20Dadap%20Batik." 
               className="text-[13px] font-bold text-[#001020] inline-flex items-center gap-2 border-b-[1.5px] border-[#001020] pb-1 hover:text-[#A87B1E] hover:border-[#A87B1E] transition-all"
             >
               Pesan Sesi Privat Disini<span className="text-lg leading-none transform translate-y-[-1px]">→</span>

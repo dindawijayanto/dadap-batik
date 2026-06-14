@@ -1,7 +1,7 @@
 /* Reusable button micro-component */
 const Button = ({ children, variant = "primary", ...props }) => {
   const baseClass =
-    "px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap";
+    "px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer uppercase tracking-widest";
   const variants = {
     // Primary brown button as seen in CTA
     primary: "bg-[#4D342D] text-white hover:bg-[#6D493E]",

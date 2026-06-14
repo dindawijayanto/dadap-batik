@@ -14,18 +14,18 @@ const ProductCard = ({
     >
       <div className="flex flex-col justify-between gap-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-bold font-serif text-[#FFE6D3]">
+          <h3 className="text-lg font-bold font-noto-serif text-[#FFE6D3]">
             {title}
           </h3>
           {/* Only show status if it exists, like 'BEST SELLER' */}
           {status && (
-            <span className="bg-[#B2993D] text-[#FFE6D3] text-xs py-3 px-4 rounded-2xl font-medium whitespace-nowrap">
+            <span className="bg-[#B2993D] text-[#FFE6D3] text-xs py-3 px-4 rounded-full font-dm-sans font-medium whitespace-nowrap">
               {status}
             </span>
           )}
         </div>
 
-        <p className="text-sm text-[#FFE6D3] leading-relaxed line-clamp-3">
+        <p className="text-sm text-[#FFE6D3] leading-relaxed line-clamp-3 font-dm-sans">
           {description}
         </p>
       </div>

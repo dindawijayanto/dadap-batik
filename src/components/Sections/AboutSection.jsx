@@ -27,17 +27,17 @@ const AboutSection = ({
         {/* Text side */}
         <div className="flex flex-col gap-6 text-left justify-center">
           <h4
-            className={`text-[16px] font_regular tracking-[3px] uppercase ${reverse ? "text-[#A88877]" : "text-[#FFE6D3] opacity-70"}`}
+            className={`text-[16px] font_regular font-dm-sans tracking-[3px] uppercase ${reverse ? "text-[#A88877]" : "text-[#FFE6D3] opacity-70"}`}
           >
             {tagline}
           </h4>
           <h2
-            className={`text-4xl md:text-5xl font-bold font-serif leading-snug ${reverse ? "text-[#4D342D]" : "text-[#FFE6D3]"}`}
+            className={`text-4xl md:text-5xl font-bold font-noto-serif leading-snug ${reverse ? "text-[#4D342D]" : "text-[#FFE6D3]"}`}
           >
             {headline}
           </h2>
           <div
-            className={`space-y-4 text-base ${reverse ? "text-[#5C4D46]" : "text-[#FFE6D3] opacity-90"}`}
+            className={`space-y-4 text-base font-dm-sans ${reverse ? "text-[#5C4D46]" : "text-[#FFE6D3] opacity-90"}`}
           >
             {bodyText.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
@@ -45,7 +45,7 @@ const AboutSection = ({
           </div>
           {subtext && (
             <div
-              className={`text-lg flex flex-row gap-8 font-serif items-center ${reverse ? "text-[#5C4D46]" : "text-[#FFE6D3] opacity-80"}`}
+              className={`text-lg flex flex-row gap-8 font-noto-serif items-center ${reverse ? "text-[#5C4D46]" : "text-[#FFE6D3] opacity-80"}`}
             >
               <div className="w-[60px] h-[2px] bg-[#FFE6D3]"></div>
               {subtext}

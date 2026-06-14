@@ -26,21 +26,21 @@ const ContactLocation = () => {
         {/* CARD KIRI: Informasi Galeri (Dark Theme) */}
         {/* Tambahan z-10 agar selalu berada di atas peta saat di layar kecil */}
         <div className="flex-1 bg-gradient-to-br from-[#4A452E] via-[#001020] via-60% to-[#001020] p-10 md:p-14 rounded-sm flex flex-col justify-center text-[#EFEAE4] shadow-lg relative z-10">
-          <h2 className="text-[28px] font-serif mb-8 text-[#EFEAE4]">Galeri Kami</h2>
+          <h2 className="text-[28px] font-noto-serif mb-8 text-[#EFEAE4]">Galeri Kami</h2>
           
           <div className="flex flex-col gap-1 text-[13px] leading-relaxed mb-10 text-[#EFEAE4]/80">
-            <span className="font-medium text-[#EFEAE4] mb-2">Dadap Batik Batu</span>
-            <p>Jl. Pronoyudo, Semanding, Dadaprejo,<br />Kec. Dau, Kota Batu, Jawa Timur,<br />Indonesia 65323</p>
+            <span className="font-medium font-dm-sans text-[#EFEAE4] mb-2">Dadap Batik Batu</span>
+            <p className='font-dm-sans'>Jl. Pronoyudo, Semanding, Dadaprejo,<br />Kec. Dau, Kota Batu, Jawa Timur,<br />Indonesia 65323</p>
           </div>
           
           <div className="flex flex-col gap-4 text-[13px] text-[#EFEAE4]/80">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 font-dm-sans">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>Sen - Sab: 08:00 - 18:00</span>
+              <span className='font-dm-sans'>Sen - Sab: 08:00 - 18:00</span>
             </div>
             <div className="flex items-center gap-4">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              <span>+62 813 3455 5825</span>
+              <span className='font-dm-sans'>+62 813 3455 5825</span>
             </div>
           </div>
         </div>
