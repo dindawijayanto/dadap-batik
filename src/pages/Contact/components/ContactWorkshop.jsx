@@ -42,7 +42,7 @@ const ContactWorkshop = () => {
               href="https://wa.me/6281334555825?text=Halo%2C%20saya%20tertarik%20untuk%20mengikuti%20sesi%20workshop%20privat%20di%20Dadap%20Batik." 
               className="text-[13px] font-bold text-[#001020] inline-flex items-center gap-2 border-b-[1.5px] border-[#001020] pb-1 hover:text-[#A87B1E] hover:border-[#A87B1E] transition-all"
             >
-              Pesan Sesi Privat Disini<span className="text-lg leading-none transform translate-y-[-1px]">→</span>
+              Pesan Sesi Privat<span className="text-lg leading-none transform translate-y-[-1px]">→</span>
             </a>
           </div>
         </div>
