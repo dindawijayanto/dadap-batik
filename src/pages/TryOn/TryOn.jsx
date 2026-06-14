@@ -1,77 +1,89 @@
-import { useTryOnStore } from "../../store/useTryOnStore";
-import HeroSection from "./components/HeroSection";
-import GenderSelector from "./components/GenderSelector";
-import MeasurementInput from "./components/MeasurementInput";
-import ClothingType from "./components/ClothingType";
-import MotifSelector from "./components/MotifSelector";
-import ResultSection from "./components/ResultSection";
-import { supabase } from "../../utils/supabase";
+import { useCallback } from 'react';
+import { useTryOnStore } from '../../store/useTryOnStore';
+import HeroSection      from './components/HeroSection';
+import GenderSelector   from './components/GenderSelector';
+import MeasurementInput from './components/MeasurementInput';
+import ClothingType     from './components/ClothingType';
+import MotifSelector    from './components/MotifSelector';
+import ResultSection    from './components/ResultSection';
+import { generateBatikMockup } from '../../utils/geminiApi';
+
+const urlToFile = async (url, filename, mimeType) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Gagal mengunduh file (${response.status}): ${url}`);
+  }
+  const buffer = await response.arrayBuffer();
+  return new File([buffer], filename, { type: mimeType });
+};
 
 export default function TryOnPage() {
-  // Pastikan isGenerating ada di dalam kurung kurawal ini
-  const { gender, clothingType, selectedMotifId, setField, isGenerating } = useTryOnStore();
-  
-  // Validasi: Form dianggap lengkap jika 3 data ini sudah diisi user
-  const isFormComplete = gender && clothingType && selectedMotifId;
+  const {
+    gender,
+    clothingType,
+    selectedMotifId,
+    selectedMotifDetails,
+    isGenerating,
+    setField,
+    getBaseModelId,
+  } = useTryOnStore();
 
-  const handleGenerate = async () => {
+  const isFormComplete = Boolean(gender && clothingType && selectedMotifId);
+
+  const handleGenerate = useCallback(async () => {
     if (!isFormComplete) return;
-    
+
     setField('isGenerating', true);
-    
+    setField('generationResultUrl', null);
+
     try {
-      // 1. Dapatkan ID Base Model (ex: "female_s_long")
-      const baseModelId = useTryOnStore.getState().getBaseModelId();
-      
-      // 2. Insert ke Supabase
-      const { data, error } = await supabase
-        .from('generations')
-        .insert([
-          {
-            base_model_id: baseModelId,
-            product_id: selectedMotifId,
-            status: 'pending'
-          }
-        ])
-        .select()
-        .single();
+      if (!selectedMotifDetails?.imageUrl) {
+        throw new Error('URL motif tidak ditemukan. Pastikan kamu sudah memilih motif.');
+      }
 
-      if (error) throw error;
+      const modelId   = getBaseModelId();
+      const modelPath = `/models/${modelId}.png`;
 
-      console.log("Berhasil masuk antrean! ID:", data.id);
+      const [motifFile, modelFile] = await Promise.all([
+        urlToFile(selectedMotifDetails.imageUrl, 'motif.jpg', 'image/jpeg'),
+        urlToFile(modelPath, `${modelId}.png`, 'image/png'),
+      ]);
 
-      // TODO Fase 4: Di sini nanti kita pasang Realtime Subscription
-      // Sementara biarkan loading terus sampai kita integrasikan Realtime-nya nanti.
+      const resultBase64 = await generateBatikMockup(motifFile, modelFile, gender, clothingType);
+      setField('generationResultUrl', resultBase64);
 
     } catch (error) {
-      console.error("Gagal mengirim pesanan:", error);
-      alert("Terjadi kesalahan sistem. Silakan coba lagi.");
+      console.error('[TryOn] Gagal generate:', error);
+      alert(`Terjadi kesalahan: ${error.message}\n\nCoba cek tab Console (F12) untuk detail.`);
+    } finally {
       setField('isGenerating', false);
     }
-  };
+  }, [isFormComplete, selectedMotifDetails, gender, clothingType, getBaseModelId, setField]);
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7]">
-      <div className="px-4 md:px-16 lg:px-32 pb-16">
+    <div className="min-h-screen bg-[#FAF6F2]">
+      <div className="py-4 px-4 md:px-16 lg:px-24">
         <HeroSection />
         <GenderSelector />
         <MeasurementInput />
         <ClothingType />
         <MotifSelector />
-        
-        {/* Tombol Trigger AI */}
+
         <div className="mt-12 flex justify-center">
-          <button 
+          <button
+            id="btn-visualize"
             onClick={handleGenerate}
             disabled={!isFormComplete || isGenerating}
-            className="px-12 py-4 bg-[#2D241B] text-[#D4AF37] font-bold font-serif text-xl rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#1A1A1A] transition-colors shadow-lg"
+            className="px-12 py-4 bg-[#2D241B] text-[#D4AF37] font-bold font-serif text-xl rounded-full
+                       disabled:opacity-50 disabled:cursor-not-allowed
+                       hover:bg-[#1A1A1A] active:scale-95
+                       transition-all duration-200 shadow-lg"
           >
-            {isGenerating ? 'Memproses...' : 'Visualisasikan Sekarang'}
+            {isGenerating ? 'Menjahit Pola Digital…' : 'Visualisasikan Sekarang'}
           </button>
         </div>
       </div>
 
-      {/* Section Hasil (Muncul di paling bawah kalau sudah di-generate) */}
       <ResultSection />
     </div>
   );
