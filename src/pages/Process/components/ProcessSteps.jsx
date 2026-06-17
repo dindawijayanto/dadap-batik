@@ -8,19 +8,19 @@ const stepsData = [
   {
     num: "02",
     title: "Pewarnaan",
-    desc: "Kain yang sudah diberi malam dicelupkan ke dalam larutan pewarna alami, mulai dari warna muda hingga gelap. Proses pencelupan dilakukan berulang kali untuk mencapai kedalaman warna.",
+    desc: "Dengan ketelitian dan kesabaran, warna dihadirkan pada kain untuk menghidupkan motif, menciptakan keindahan yang tenang dalam setiap helainya.",
     img: "/process/pewarnaan.png"
   },
   {
     num: "03",
     title: "Nglorod",
-    desc: "Kain direbus dalam air mendidih yang dicampur abu soda atau waterglass. Proses perebusan ini meluruhkan seluruh lapisan malam dari permukaan kain, membuka kembali motif putih yang tersembunyi di balik lapisan lilin dan warna.",
+    desc: "Kain direbus dalam air mendidih yang dicampur abu soda atau waterglass. Proses perebusan ini meluruhkan seluruh lapisan malam dari permukaan kain, membuka kembali motif yang tersembunyi di balik lapisan lilin dan warna.",
     img: "/process/nglorod.png"
   },
   {
     num: "04",
     title: "Finishing",
-    desc: "Setelah malam luruh, kain dicuci bersih lalu dijemur di bawah sinar matahari hingga kering sempurna. Pengrajin kemudian melakukan pengecekan kualitas akhir, memastikan motif tajam, warna merata, dan tidak ada bagian yang cacat sebelum kain siap dilepas ke tangan pemiliknya.",
+    desc: "Setelah malam luruh, kain dicuci bersih lalu dijemur hingga kering sempurna. Pengrajin kemudian melakukan pengecekan kualitas akhir, memastikan motif tajam, warna merata, dan tidak ada bagian yang cacat sebelum kain siap dilepas ke tangan pembeli atau customer.",
     img: "/process/finishing.png"
   }
 ];

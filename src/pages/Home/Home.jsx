@@ -8,14 +8,14 @@ const craftItems = [
     title: "Handwritten (Tulis)",
     status: "PREMIUM",
     description:
-      "Puncak dari sebuah karya. Setiap titik dan garisnya di gambar secara manual menggunakan alat yang dinamakan “Canting”. Tidak ada kain yang sama persis ",
+      "Puncak dari sebuah karya. Setiap titik dan garisnya di gambar secara manual menggunakan alat yang dinamakan “Canting”. Tidak ada kain yang sama persis.",
     image: "home/handwritten.png",
     reverse: true,
   },
   {
     title: "Stamped (Cap)",
     description:
-      "Dibuat menggunakan stempel tembaga yang diukir dengan tangan. Meskipun lebih cepat daripada “Tulis”, metode ini tetap merupakan metode wax-resist yang otentik dengan sentuhan keahlian tradisional.",
+      "Teknik pembuatan batik yang memanfaatkan cap berbahan tembaga untuk membentuk motif pada kain. Proses ini menghasilkan corak yang rapi dan seragam, sekaligus lebih cepat.",
     image: "home/stamped.png",
     reverse: false,
   },
@@ -25,7 +25,7 @@ const homeAbout = {
   tagline: "TANGAN DIBALIK SETIAP KARYANYA",
   headline: "Perjalanan Kami: Imam & Keluarga",
   bodyText: [
-    "Dilahirkan di jantung Jawa Tengah, Dadap Batik berawal dari sebuah impian sederhana Imam Santoso dan istrinya untuk melestarikan seni tradisi menggunakan “canting” yang mulai pudar. Apa yang dulunya berawal dari sebuah studio rumahan kecil, kini telah tumbuh menjadi sebuah galeri yang memiliki banyak motif kain batik. ",
+    "Dilahirkan di jantung Jawa Timur, Dadap Batik berawal dari sebuah impian sederhana Imam Santoso dan istrinya untuk melestarikan seni tradisi menggunakan “canting” yang mulai pudar. Apa yang dulunya berawal dari sebuah studio rumahan kecil, kini telah tumbuh menjadi sebuah galeri yang memiliki banyak motif kain batik. ",
     "Bagi Pak Imam, batik bukan sekadar selembar kain—melainkan sebuah kanvas filosofis. 'Setiap titikan malam adalah sebuah doa,' ujarnya. Hingga hari ini, mereka terus membimbing generasi perajin baru, memastikan ketukan ritmis 'tap-tap' dari canting tak akan pernah lenyap dari lanskap budaya kita.",
   ],
   subtext: "Melestarikan jiwa, benang demi benang.",
@@ -78,7 +78,7 @@ const Home = () => {
             Keahlian yang Tak Terukur
           </h2>
           <p className="text-base text-[#001020] leading-relaxed font-dm-sans">
-            Dari tahapan ‘Nyangking‘ hingga tahapan ‘Nglorod‘, saksikan setiap
+            Dari tahapan ‘Nyanting‘ hingga tahapan ‘Nglorod‘, saksikan setiap
             tahap teliti yang merubah kain katun halus menjadi sebuah mahakarya.
           </p>
         </div>

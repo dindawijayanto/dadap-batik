@@ -25,8 +25,7 @@ const Footer = () => {
           <div className="text-sm text-[#001020] leading-relaxed max-w-[288px]">
             <p>
               {/* Replace with actual address */}
-              Jl. Pronoyudo, Semanding, Dadaprejo, Kec. Dau, Kota Batu, Jawa
-              Timur, Indonesia 65323
+              Jl. Pronoyudo 75, Dadaprejo, Junrejo, Batu, 65323
             </p>
             <p className="mt-1">Senin - Sabtu : 08:00 - 18:00</p>
           </div>

@@ -16,12 +16,12 @@ const ProcessTime = () => {
 
         <div className="border border-[#D4A484] opacity-20"></div>
         
-        <div className="flex justify-center lg:justify-start gap-12 mt-4">
+        {/* <div className="flex justify-center lg:justify-start gap-12 mt-4">
           <div className="flex flex-col gap-2">
             <span className="text-4xl font-noto-serif text-[#FAF6F2]">100%</span>
             <span className="text-xs font-dm-sans font-regular tracking-widest text-[#A88877] uppercase">Bahan Alami</span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex-1 flex justify-center lg:justify-end w-full relative z-10 ">

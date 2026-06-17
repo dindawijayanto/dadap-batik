@@ -16,10 +16,7 @@ const StoryHero = () => {
           </h1>
 
           <p className="text-[#4A4A4A] leading-relaxed text-sm lg:text-base font-dm-sans max-w-xs sm:max-w-sm lg:max-w-md">
-            Di Dadap Batik, kami tidak sekadar mewarnai kain, kami menjaga
-            gema jiwa Jawa yang hidup dalam setiap helainya. Tiap goresan
-            canting adalah percakapan sunyi antara pengrajin dan para leluhur,
-            diukir dalam malam panas dan warna indigo.
+            Di Dadap Batik Batu, setiap proses dilakukan dengan ketenangan dan ketelitian, menghadirkan degup warisan budaya yang tetap hidup dalam setiap helai kain.
           </p>
         </div>
 

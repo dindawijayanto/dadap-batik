@@ -27,8 +27,8 @@ const ProcessComparison = () => {
             </tr>
             <tr className="border-b border-[#B2993D50]">
               <td className="py-6 px-6 font-semibold text-white/90">Kisaran Harga</td>
-              <td className="py-6 px-6 bg-[#B2993D30] text-white">Kemewahan Premium</td>
-              <td className="py-6 px-6 text-[#E6DDD6]">Kemewahan Terjangkau</td>
+              <td className="py-6 px-6 bg-[#B2993D30] text-white">400.000 - 2.000.000</td>
+              <td className="py-6 px-6 text-[#E6DDD6]">175.000 - 350.000</td>
             </tr>
             <tr>
               <td className="py-6 px-6 font-semibold text-white/90">Keunikan</td>
