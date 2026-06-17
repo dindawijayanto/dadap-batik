@@ -8,6 +8,7 @@ const filters = [
   "Tulis",
   "Cap",
   "Kombinasi",
+  "Product Fashion"
 ];
 
 const Catalog = () => {
