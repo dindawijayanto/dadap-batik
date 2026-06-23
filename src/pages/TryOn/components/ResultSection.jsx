@@ -6,7 +6,7 @@ export default function ResultSection() {
 
   const fabricLength  = getFabricLength();
   const basePrice     = selectedMotifDetails?.price ?? 0;
-  const pricePerMeter = fabricLength ? Math.round(basePrice / fabricLength) : 0;
+  const pricePerKain = fabricLength ? Math.round(basePrice / fabricLength) : 0;
 
   const generateWaLink = () => {
     const phone = "6281334555825";
@@ -82,10 +82,10 @@ export default function ResultSection() {
                          </span>
                      </div>
                      <div className="flex justify-between items-center">
-                         <span className="text-gray-400">Harga per Meter</span>
+                         <span className="text-gray-400">Harga per Kain</span>
                          <span className="font-medium text-white">
                              {selectedMotifDetails && fabricLength != null
-                                 ? `Rp ${pricePerMeter.toLocaleString('id-ID')} / m`
+                                 ? `Rp ${pricePerKain.toLocaleString('id-ID')} / kain`
                                  : '-'}
                          </span>
                      </div>

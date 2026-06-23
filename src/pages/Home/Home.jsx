@@ -38,7 +38,7 @@ const homeHeritage = {
   tagline: "Merajut Warisan Selama 7 Tahun",
   // headline: "Our Journey to Excellence",
   bodyText: [
-    "Di Dadap Batik, setiap benang menceritakan kisah tentang kesabaran dan ketelitian. Sesuatu yang awalnya hanya sebuah usaha kecil keluarga di Jawa Tengah, kini telah berkembang menjadi instansi tekstil di Indonesia yang bergengsi, dan kini secara resmi diakui sebagai badan hukum berbentuk PT",
+    "Di Dadap Batik, setiap benang menceritakan kisah tentang kesabaran dan ketelitian. Sesuatu yang awalnya hanya sebuah usaha kecil keluarga di Jawa Timur, kini telah berkembang menjadi instansi tekstil di Indonesia yang bergengsi, dan kini secara resmi diakui sebagai badan hukum berbentuk PT",
     "Keahlian kami berakar pada tradisi canting, di mana malam dan pewarna berpadu menciptakan motif yang memanggul makna filosofis: kehidupan, kemakmuran, dan penghormatan.",
   ],
   features: [
