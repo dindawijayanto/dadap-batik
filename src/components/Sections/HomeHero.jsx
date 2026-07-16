@@ -23,7 +23,7 @@ const HomeHero = () => {
         <p className="text-base text-[#5C4D46] leading-relaxed max-w-lg font-dm-sans">
           Rasakan pengalaman puisi yang bisu dari kerajinan tangan Indonesia.
           Setiap polanya menceritakan sebuah kesabaran, budaya, dan keanggunan
-          abadi yang digambar dengan tangan untuk para jiwa muda. 
+          abadi yang digambar dengan tangan untuk para jiwa muda.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-2 ">
