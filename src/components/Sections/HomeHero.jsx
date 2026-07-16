@@ -1,5 +1,6 @@
 /* Specific to the Home page hero */
 import Button from "../UI/Button";
+import { Link } from 'react-router-dom';
 
 const HomeHero = () => {
   return (
@@ -27,8 +28,13 @@ const HomeHero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-2 ">
-          <Button variant="tryOn">Explore Collection</Button>
-          <Button variant="secondary">Try On Batik</Button>
+          <Link to="/catalog">
+            <Button variant="tryOn">Explore Collection</Button>
+          </Link>
+
+          <Link to="/try-on">
+            <Button variant="secondary">Try On Batik</Button>
+          </Link>
         </div>
       </div>
     </section>
