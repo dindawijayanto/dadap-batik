@@ -1,68 +1,35 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-
-const fileToGenerativePart = async (fileOrUrl) => {
-  let blob;
-  let mimeType;
-
-  if (typeof fileOrUrl === 'string') {
-    const response = await fetch(fileOrUrl);
-    if (!response.ok) {
-      throw new Error(`Gagal mengambil gambar dari URL (${response.status}): ${fileOrUrl}`);
-    }
-    blob     = await response.blob();
-    mimeType = blob.type || 'image/jpeg';
-  } else {
-    blob     = fileOrUrl;
-    mimeType = fileOrUrl.type;
+const toAbsoluteUrl = (urlOrPath) => {
+  try {
+    return new URL(urlOrPath, window.location.origin).toString();
+  } catch {
+    return urlOrPath;
   }
+};
 
-  if (blob.type === 'text/html' || !mimeType.startsWith('image/')) {
-    throw new Error(`File yang dimuat bukan gambar yang valid (tipe: ${mimeType}). Pastikan URL gambar benar: ${typeof fileOrUrl === 'string' ? fileOrUrl : 'File Upload'}`);
-  }
-
-  // Jika ukuran terlalu besar (misal > 4MB), API Gemini sering error 500.
-  if (blob.size > 4 * 1024 * 1024) {
-    console.warn(`[Gemini] Gambar cukup besar (${(blob.size / 1024 / 1024).toFixed(2)} MB). Ini berisiko menyebabkan error 500 di Gemini.`);
-  }
-
-  const data = await new Promise((resolve, reject) => {
-    const reader     = new FileReader();
-    reader.onloadend = () => resolve(reader.result.split(',')[1]);
-    reader.onerror   = reject;
-    reader.readAsDataURL(blob);
+export const generateBatikMockup = async (fabricUrl, modelUrl, gender, clothingType) => {
+  const response = await fetch(`${API_BASE_URL}/api/try-on`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fabricImageUrl: toAbsoluteUrl(fabricUrl),
+      modelImageUrl: toAbsoluteUrl(modelUrl),
+      gender,
+      clothingType,
+    }),
   });
 
-  return { inlineData: { data, mimeType } };
-};
-
-const buildPrompt = (gender, clothingType) => {
-  const sleeve      = clothingType === 'long' ? 'long-sleeve' : 'short-sleeve';
-  const genderLabel = gender === 'male' ? 'male' : 'female';
-
-  return `Apply the batik fabric pattern from image 1 onto the shirt of the ${genderLabel} model in image 2. The shirt is a ${sleeve} Indonesian batik kemeja (classic collar, button-up). Preserve all original batik colors and motif details exactly. Use realistic fabric draping, natural folds, and premium texture. Keep the model's face, skin tone, and body proportions unchanged. Clean editorial background, high-end fashion photography.`;
-};
-
-export const generateBatikMockup = async (fabricFile, modelFile, gender, clothingType) => {
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
-
-  const [fabricPart, modelPart] = await Promise.all([
-    fileToGenerativePart(fabricFile),
-    fileToGenerativePart(modelFile),
-  ]);
-
-  const result   = await model.generateContent([buildPrompt(gender, clothingType), fabricPart, modelPart]);
-  const response = await result.response;
-
-  const parts     = response.candidates?.[0]?.content?.parts ?? [];
-  const imagePart = parts.find((p) => p.inlineData);
-
-  if (imagePart) {
-    return `data:${imagePart.inlineData.mimeType};base64,${imagePart.inlineData.data}`;
+  let payload;
+  try {
+    payload = await response.json();
+  } catch {
+    throw new Error('Gagal membaca respons dari server. Coba lagi.');
   }
 
-  const textPart = parts.find((p) => p.text)?.text ?? '(no text)';
-  console.warn('[Gemini] No image in response:', textPart);
-  throw new Error('Gemini tidak mengembalikan gambar. Coba lagi atau ubah motif.');
+  if (!response.ok || !payload?.success) {
+    throw new Error(payload?.message || `Terjadi kesalahan pada server (${response.status}).`);
+  }
+
+  return payload.image;
 };
