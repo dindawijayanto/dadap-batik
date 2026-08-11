@@ -7,7 +7,7 @@ export default function ResultSection() {
   const fabricLength  = getFabricLength();
   const basePrice     = selectedMotifDetails?.price ?? 0;
   const pricePerKain = fabricLength ? Math.round(basePrice / fabricLength) : 0;
-  const { size, label } = getBmiCategory();
+  const { size } = getBmiCategory();
   const generateWaLink = () => {
     const phone = "6281334555825";
     const technique = selectedMotifDetails?.technique || 'Batik Tulis';
@@ -18,7 +18,7 @@ export default function ResultSection() {
     const message = `Halo, saya tertarik untuk memesan batik custom di Dadap Batik dengan detail berikut:\n\n` +
       `- Teknik Dasar: ${technique}\n` +
       `- Motif Utama: ${motif}\n` +
-      `- Ukuran Tubuh: ${size} (${label})\n` +
+      `- Ukuran Tubuh: ${size}\n` +
       `- Panjang Kain: ${length}\n` +
       `- Harga Estimasi: ${price}\n\n` +
       `Mohon informasi lebih lanjut terkait pemesanan ini. Terima kasih.`;
