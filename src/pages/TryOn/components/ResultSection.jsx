@@ -9,18 +9,16 @@ export default function ResultSection() {
   const pricePerKain = fabricLength ? Math.round(basePrice / fabricLength) : 0;
   const { size } = getBmiCategory();
   const generateWaLink = () => {
-    const phone = "6281334555825";
+    const phone = "6285777182713";
     const technique = selectedMotifDetails?.technique || 'Batik Tulis';
     const motif = selectedMotifDetails?.name || 'Belum Dipilih';
-    const length = fabricLength != null ? `${fabricLength} m` : '-';
-    const price = selectedMotifDetails ? `Rp ${basePrice.toLocaleString('id-ID')}` : '-';
+      const length = fabricLength != null ? `${fabricLength} m` : '-';
 
     const message = `Halo, saya tertarik untuk memesan batik custom di Dadap Batik dengan detail berikut:\n\n` +
       `- Teknik Dasar: ${technique}\n` +
       `- Motif Utama: ${motif}\n` +
       `- Ukuran Tubuh: ${size}\n` +
       `- Panjang Kain: ${length}\n` +
-      `- Harga Estimasi: ${price}\n\n` +
       `Mohon informasi lebih lanjut terkait pemesanan ini. Terima kasih.`;
 
     return `https://wa.me/6285777182713${phone}?text=${encodeURIComponent(message)}`;
