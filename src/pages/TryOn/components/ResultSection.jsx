@@ -88,14 +88,6 @@ export default function ResultSection() {
                                  : '-'}
                          </span>
                      </div>
-                     <div className="flex justify-between items-center">
-                         <span className="text-gray-400">Harga Estimasi</span>
-                         <span className="font-medium text-white text-lg">
-                             {selectedMotifDetails
-                                 ? `Rp ${basePrice.toLocaleString('id-ID')}`
-                                 : '-'}
-                         </span>
-                     </div>
                  </div>
 
                 {/* Estimas Waktu Box */}
