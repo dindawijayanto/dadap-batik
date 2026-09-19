@@ -29,7 +29,7 @@ function BmiBadge({ bmi, category }) {
         style={{ backgroundColor: category.color }}
       />
       <span className="text-white text-xs font-medium whitespace-nowrap">
-        BMI {bmi.toFixed(1)} · {category.label} · Size {category.size}
+        BMI {bmi.toFixed(1)} · Size {category.size}
       </span>
     </div>
   );
