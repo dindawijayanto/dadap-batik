@@ -23,7 +23,7 @@ export default function ResultSection() {
       `- Harga Estimasi: ${price}\n\n` +
       `Mohon informasi lebih lanjut terkait pemesanan ini. Terima kasih.`;
 
-    return `https://wa.me/message/5BI364MFRHZWN1/${phone}?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/6285777182713${phone}?text=${encodeURIComponent(message)}`;
   };
 
   if (!isGenerating && !generationResultUrl) return null;

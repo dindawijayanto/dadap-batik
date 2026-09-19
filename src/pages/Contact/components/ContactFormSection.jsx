@@ -81,7 +81,7 @@ const ContactFormSection = () => {
               Bicara langsung dengan konsultan batik kami via WhatsApp untuk mendapatkan bantuan segera.
             </p>
             <a 
-              href="https://wa.me/message/5BI364MFRHZWN1" 
+              href="https://wa.me/6285777182713" 
               target="_blank" 
               rel="noreferrer"
               className="font-['DM_Sans',_sans-serif] text-[12px] font-bold tracking-widest uppercase text-[#1A1A1A] hover:text-[#B5914A] transition-colors flex items-center gap-2"
