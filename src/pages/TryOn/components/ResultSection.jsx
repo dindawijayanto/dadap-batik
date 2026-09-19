@@ -21,7 +21,7 @@ export default function ResultSection() {
       `- Panjang Kain: ${length}\n` +
       `Mohon informasi lebih lanjut terkait pemesanan ini. Terima kasih.`;
 
-    return `https://wa.me/6285777182713${phone}?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   };
 
   if (!isGenerating && !generationResultUrl) return null;
