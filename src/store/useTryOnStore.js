@@ -32,9 +32,9 @@ export const useTryOnStore = create((set, get) => ({
 
   getBmiCategory: () => {
     const bmi = get().getBmi();
-    if (bmi < 18.5) return { label: 'Kurus',  size: 'S', color: '#60a5fa' };
-    if (bmi < 25.0) return { label: 'Normal', size: 'M', color: '#4ade80' };
-    return              { label: 'Gemuk',  size: 'L', color: '#f87171' };
+    if (bmi < 18.5) return {size: 'S', color: '#60a5fa' };
+    if (bmi < 25.0) return {size: 'M', color: '#4ade80' };
+    return              {size: 'L', color: '#f87171' };
   },
 
   getBaseModelId: () => {
