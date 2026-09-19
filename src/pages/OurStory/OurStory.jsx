@@ -30,7 +30,7 @@ const ctaData = {
   description: "Dari busana pernikahan hingga cendera mata korporat, kami siap menerjemahkan visimu menjadi karya batik tulis yang tak tertandingi.",
   primaryBtn: {
     text: "Pesan Batik Eksklusif",
-    link: "/contact"
+    link: "/try-on"
   },
   secondaryBtn: {
     text: "Daftar Sesi Workshop",
